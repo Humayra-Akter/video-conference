@@ -1,7 +1,12 @@
 import React from "react";
 
-function Meeting() {
-  return <div></div>;
+function Meeting({ params }: { params: { id: string } }) {
+  return (
+    <div>
+      Meeting Room
+      {params.id}
+    </div>
+  );
 }
 
 export default Meeting;
