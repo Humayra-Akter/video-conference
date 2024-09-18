@@ -1,9 +1,17 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from "react";
 
 function HomeLayout({ children }: { children: ReactNode }) {
-  return <div>
-    {children}
-  </div>;
+  return (
+    <div className="relative">
+      Navbar
+      <div className="flex">
+        sidebar
+        <section className="flex min-h-screen flex-1 flex-col px-6 pb-6 pt-28 max-md:pb-14 sm:px-14">
+          <div className="w-full">{children}</div>
+        </section>
+      </div>
+    </div>
+  );
 }
 
-export default HomeLayout
+export default HomeLayout;
