@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -9,8 +10,13 @@ import {
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import Link from "next/link";
-
+import { sidebarLinks } from "@/constants";
+  import { usePathname } from "next/navigation";
+  
 const MobileNav = () => {
+
+    const pathname = usePathname();
+
   return (
     <div className="w-full max-w-[264px]">
       <Sheet>
@@ -37,7 +43,40 @@ const MobileNav = () => {
             </p>
           </Link>
 
-          <div className="flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto"></div>
+          <div className="flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto">
+            <SheetClose asChild>
+              <div className="flex h-full flex-col gap-6 text-white">
+                {sidebarLinks.map((item) => {
+                  const isActive =
+                    pathname === item.route ||
+                    pathname.startsWith(`${item.route}/`);
+
+                  return (
+                    <Link
+                      href={item.route}
+                      key={item.label}
+                      className={cn(
+                        "flex gap-4 items-center p-4 rounded-lg justify-start",
+                        {
+                          "bg-blue-1": isActive,
+                        }
+                      )}
+                    >
+                      <Image
+                        src={item.imgURL}
+                        alt={item.label}
+                        width={24}
+                        height={24}
+                      />
+                      <p className="text-lg font-semibold max-lg:hidden">
+                        {item.label}
+                      </p>
+                    </Link>
+                  );
+                })}
+              </div>
+            </SheetClose>
+          </div>
         </SheetContent>
       </Sheet>
     </div>
