@@ -1,8 +1,14 @@
 import React from "react";
 
 const Home = () => {
-  const date = "";
-  const time = "";
+  const now = new Date();
+  const time = now.toLocaleTimeString("ban", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const date = new Intl.DateTimeFormat("ban", { dateStyle: "full" }).format(
+    now
+  );
   return (
     <div className="flex size-full flex-col gap-10 text-white">
       <div className="h-[300px] w-full rounded-3xl bg-hero bg-cover">
