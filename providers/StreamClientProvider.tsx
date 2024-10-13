@@ -1,6 +1,5 @@
 import { useUser } from "@clerk/nextjs";
 import { StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
-import Error from "next/error";
 import { ReactNode, useEffect, useState } from "react";
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
@@ -12,7 +11,16 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!isLoaded || !user) return;
-    if (!apiKey) throw new Error("stream Api key is missing");
+    if (!apiKey) throw new Error('Stream Api key is missing');
+
+    const client = new StreamVideoClient({
+      apiKey,
+      user:{
+        id: user?.id,
+        name:user?.username || user?.id,
+
+      }
+    })
   }, [user, isLoaded]);
 
   return <StreamVideo client={videoClient}></StreamVideo>;
