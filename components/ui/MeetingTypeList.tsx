@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import HomeCard from "./HomeCard";
 import { useRouter } from "next/navigation";
 import MeetingModal from "./MeetingModal";
+import { useUser } from "@clerk/nextjs";
+import { useStreamVideoClient } from "@stream-io/video-react-sdk";
 
 const MeetingTypeList = () => {
   const router = useRouter();
@@ -10,8 +12,11 @@ const MeetingTypeList = () => {
     "isScheduleMeeting" | "isJoiningMeeting" | "isInstantMeeting" | undefined
   >();
 
+  const { user } = useUser();
+  const client = useStreamVideoClient();
+
   const createMeeting = () => {
-    
+    if (!client || !user) return;
   };
 
   return (
