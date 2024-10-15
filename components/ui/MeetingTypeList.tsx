@@ -4,7 +4,7 @@ import HomeCard from "./HomeCard";
 import { useRouter } from "next/navigation";
 import MeetingModal from "./MeetingModal";
 import { useUser } from "@clerk/nextjs";
-import { useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { describe } from "node:test";
 
 const MeetingTypeList = () => {
@@ -12,11 +12,13 @@ const MeetingTypeList = () => {
   const [meetingState, setMeetingState] = useState<
     "isScheduleMeeting" | "isJoiningMeeting" | "isInstantMeeting" | undefined
   >();
-  const [values, setvalues] = useState({
+  const [values, setValues] = useState({
     dateTime: new Date(),
     description: "",
     link: "",
   });
+
+  const [callDetails, setCallDetails] = useState<Call>();
 
   const { user } = useUser();
   const client = useStreamVideoClient();
@@ -41,6 +43,12 @@ const MeetingTypeList = () => {
           },
         },
       });
+
+      setCallDetails(call);
+      
+      if (!values.description) {
+        router.push(`/meeting/${call.id}`);
+      }
     } catch (error) {
       console.log(error);
     }
