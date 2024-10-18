@@ -1,6 +1,10 @@
 "use client";
 
-import { useCall, VideoPreview } from "@stream-io/video-react-sdk";
+import {
+  DeviceSettings,
+  useCall,
+  VideoPreview,
+} from "@stream-io/video-react-sdk";
 import React, { useEffect, useState } from "react";
 
 const MeetingSetup = () => {
@@ -24,6 +28,17 @@ const MeetingSetup = () => {
     <div className="flex h-screen w-full flex-col items-center justify-center gap-2 text-white">
       <h1 className="text-xl font-bold">Setup</h1>
       <VideoPreview />
+      <div className="flex h-16 items-center justify-center gap-2">
+        <label className="flex items-center justify-center gap-2 font-medium">
+          <input
+            type="checkbox"
+            checked={isMicCamToggledOn}
+            onChange={(e) => setIsMicCamToggledOn(e.target.checked)}
+          />
+          Join with mic and camera off
+        </label>
+        <DeviceSettings />
+      </div>
     </div>
   );
 };
