@@ -12,18 +12,21 @@ const MeetingSetup = () => {
   const [isMicCamToggledOn, setIsMicCamToggledOn] = useState(false);
   const call = useCall();
 
+  if (!call) {
+    throw new Error(
+      "useStreamCall must be used within a StreamCall component."
+    );
+  }
+  
   useEffect(() => {
-    if (!call) {
-      throw new Error("useCall must be within stream call component");
-    }
     if (isMicCamToggledOn) {
-      call?.camera.disable();
-      call?.microphone.disable();
+      call.camera.disable();
+      call.microphone.disable();
     } else {
-      call?.camera.enable();
-      call?.microphone.enable();
+      call.camera.enable();
+      call.microphone.enable();
     }
-  }, [isMicCamToggledOn, call?.camera, call?.microphone]);
+  }, [isMicCamToggledOn, call.camera, call.microphone]);
 
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center gap-2 text-white">
