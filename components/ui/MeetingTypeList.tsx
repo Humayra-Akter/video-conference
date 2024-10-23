@@ -98,10 +98,51 @@ const MeetingTypeList = () => {
         className="bg-purple-1"
       />
 
+      {!callDetails ? (
+        <MeetingModal
+          isOpen={meetingState === "isScheduleMeeting"}
+          onClose={() => setMeetingState(undefined)}
+          title="Create Meeting"
+          className="text-center"
+          buttonText="Create Meeting"
+          handleClick={createMeeting}
+       >
+<div className="flex flex-col gap-3">
+<label>
+  <TextArea/>
+</label>
+</div>
+
+       </MeetingModal>
+      ) : (
+        <MeetingModal
+          isOpen={meetingState === "isScheduleMeeting"}
+          onClose={() => setMeetingState(undefined)}
+          title="Meeting Created"
+          image="/icons/checked.svg"
+          buttonIcon="icons/copy.svg"
+          buttonText="Copy meeting link"
+          handleClick={() => {
+            // navigator.clipboard.writeText(meetingLink);
+            // toast({ title: "Link copied" });
+          }}
+          className="text-center"
+        />
+      )}
+
+      <MeetingModal
+        isOpen={meetingState === "isJoiningMeeting"}
+        onClose={() => setMeetingState(undefined)}
+        title="Type the link here"
+        className="text-center"
+        buttonText="Join Meeting"
+        handleClick={() => router.push(values.link)}
+      ></MeetingModal>
+
       <MeetingModal
         isOpen={meetingState === "isInstantMeeting"}
         onClose={() => setMeetingState(undefined)}
-        title="Start an instant meeting"
+        title="Start an Instant Meeting"
         className="text-center"
         buttonText="Start Meeting"
         handleClick={createMeeting}
