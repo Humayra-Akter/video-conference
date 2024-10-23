@@ -24,6 +24,7 @@ const EndCallButton = () => {
         await call.endCall();
         router.push("/");
       }}
+      className="bg-red-500"
     >
       End Call for Everyone
     </Button>
