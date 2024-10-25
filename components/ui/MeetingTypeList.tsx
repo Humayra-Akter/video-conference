@@ -8,6 +8,14 @@ import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "./textarea";
 import ReactDatePicker from "react-datepicker";
+// import { Input } from "./ui/input";
+
+const initialValues = {
+  dateTime: new Date(),
+  description: "",
+  link: "",
+};
+
 
 const MeetingTypeList = () => {
   const router = useRouter();
@@ -67,7 +75,10 @@ const MeetingTypeList = () => {
         title: "Failed to create meeting",
       });
     }
-  };
+  }
+
+
+ const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
 
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -145,8 +156,8 @@ const MeetingTypeList = () => {
           buttonIcon="icons/copy.svg"
           buttonText="Copy meeting link"
           handleClick={() => {
-            // navigator.clipboard.writeText(meetingLink);
-            // toast({ title: "Link copied" });
+            navigator.clipboard.writeText(meetingLink);
+            toast({ title: "Link copied" });
           }}
           className="text-center"
         />
