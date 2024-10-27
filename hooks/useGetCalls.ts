@@ -49,7 +49,6 @@ export const useGetCalls = () => {
     }
   );
 
-  return{
-    endedCalls, upcomingCalls,recordings:calls, isLoading
-  }
+   return { endedCalls, upcomingCalls, callRecordings: calls, isLoading };
+
 };
