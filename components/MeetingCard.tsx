@@ -1,11 +1,10 @@
 "use client";
 
 import Image from "next/image";
-
-import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
 import { avatarImages } from "@/constants";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 interface MeetingCardProps {
   title: string;
@@ -31,7 +30,7 @@ const MeetingCard = ({
   const { toast } = useToast();
 
   return (
-    <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 xl:max-w-[568px]">
+    <div className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 xl:max-w-[568px]">
       <article className="flex flex-col gap-5">
         <Image src={icon} alt="upcoming" width={28} height={28} />
         <div className="flex justify-between">
@@ -64,7 +63,7 @@ const MeetingCard = ({
               {buttonIcon1 && (
                 <Image src={buttonIcon1} alt="feature" width={20} height={20} />
               )}
-              &nbsp; {buttonText}
+              {buttonText}
             </Button>
             <Button
               onClick={() => {
@@ -81,12 +80,12 @@ const MeetingCard = ({
                 width={20}
                 height={20}
               />
-              &nbsp; Copy Link
+              Copy Link
             </Button>
           </div>
         )}
       </article>
-    </section>
+    </div>
   );
 };
 
