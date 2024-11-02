@@ -8,6 +8,7 @@ import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "./textarea";
 import ReactDatePicker from "react-datepicker";
+import { Input } from "./input";
 // import { Input } from "./ui/input";
 
 const initialValues = {
@@ -15,7 +16,6 @@ const initialValues = {
   description: "",
   link: "",
 };
-
 
 const MeetingTypeList = () => {
   const router = useRouter();
@@ -75,10 +75,9 @@ const MeetingTypeList = () => {
         title: "Failed to create meeting",
       });
     }
-  }
+  };
 
-
- const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
 
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -170,7 +169,18 @@ const MeetingTypeList = () => {
         className="text-center"
         buttonText="Join Meeting"
         handleClick={() => router.push(values.link)}
-      ></MeetingModal>
+      >
+        <Input
+          placeholder="Meeting link"
+          className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+          onChange={(e) =>
+            setValues({
+              ...values,
+              link: e.target.value,
+            })
+          }
+        />
+      </MeetingModal>
 
       <MeetingModal
         isOpen={meetingState === "isInstantMeeting"}
